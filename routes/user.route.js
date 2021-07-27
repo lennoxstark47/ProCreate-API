@@ -34,5 +34,10 @@ Router.route('/add').post((req, res) => {
 			res.status(400).json('Error: ' + err)
 		);
 });
+Router.route('/:id').get((req, res) => {
+	User.findById(req.params.id)
+		.then((response) => res.json(response))
+		.catch((err) => res.json(err));
+});
 
 module.exports = Router;

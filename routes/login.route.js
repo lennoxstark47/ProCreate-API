@@ -7,15 +7,15 @@ Router.route('/').post((req, res) => {
 		.then((user) => {
 			if (user) {
 				if (req.body.password === user.password) {
-					return res.json('success');
+					return res.json(user);
+				} else {
+					return res.json('wrong password');
 				}
-				return res.status(400).json('wrong password');
+			} else {
+				return res.json('User not found');
 			}
-			res.status(404).json('User not found');
 		})
-		.catch((err) =>
-			res.status(400).json('Error: ' + err)
-		);
+		.catch((err) => res.json('Error: ' + err));
 });
 
 module.exports = Router;
